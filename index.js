@@ -12,8 +12,14 @@ app.use(
 
 app.get(':endpoint([\\/\\w\\.-]*)', (req, res) => {
     let endpoint = process.env.API_BASE_URL + req.params.endpoint
+    let params = {}
+    for( let [field, value] of Object.entries(req.query) ) {
+        params[field] = value
+    }
 
-    axios.get(endpoint)
+    axios.get(endpoint, {
+        params
+    })
         .then(
             response => res.json(response.data)
         )
