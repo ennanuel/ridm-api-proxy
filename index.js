@@ -11,10 +11,17 @@ app.use(
 )
 
 app.get(':endpoint([\\/\\w\\.-]*)', (req, res) => {
-    let endpoint = process.env.API_BASE_URL + req.params.endpoint
+    let endpoint = req.params.endpoint.includes('musixmatch') ? process.env.MUSIXMATCH_URL : process.env.DEEZER_URL
+    endpoint += req.params.endpoint.replace(/^\/[a-z]+/i, '')
+
     let params = {}
+
     for( let [field, value] of Object.entries(req.query) ) {
         params[field] = value
+    }
+
+    if(req.params.endpoint.includes('musixmatch')) {
+        params['apikey'] = process.env.MUSIXMATCH_API_KEY
     }
 
     axios.get(endpoint, {
