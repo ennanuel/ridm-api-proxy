@@ -35,4 +35,6 @@ app.get(':endpoint([\\/\\w\\.-]*)', (req, res) => {
         })
 })
 
-app.listen(3000)
+app.listen(process.env.PORT || 5000, () => {
+    console.log('backend running')
+})
