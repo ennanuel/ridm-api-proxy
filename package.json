@@ -4,7 +4,9 @@
   "description": "\"a proxy for my ridm web app\"",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "author": "\"Ezema Emmanuel\"",
   "license": "ISC",
@@ -12,6 +14,7 @@
     "axios": "^1.2.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "nodemon": "^3.0.1"
   }
 }
