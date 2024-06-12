@@ -5,6 +5,10 @@ const app = express();
 
 require('dotenv').config();
 
+const HEADERS = {
+   'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Edg/125.0.0.0'
+}
+
 app.use(
     cors({
         origin: '*'
@@ -27,7 +31,7 @@ app.get('/musixmatch/:endpoint([\\/\\w\\.-]*)', async function (req, res) {
         let params = getParams(req.query);
         params['apikey'] = process.env.MUSIXMATCH_API_KEY;
 
-        const response = await axios.get(FULL_URL, { params });
+        const response = await axios.get(FULL_URL, { params, headers: HEADERS });
         const result = response.data;
         return res.status(200).json(result); 
     } catch (error) {
@@ -43,7 +47,7 @@ app.get('/deezer/:endpoint([\\/\\w\\.-]*)', async function (req, res) {
 
         let params = getParams(req.query);
 
-        const response = await axios.get(FULL_URL, { params });
+        const response = await axios.get(FULL_URL, { params, headers: HEADERS });
         const result = response.data;
         return res.status(200).json(result); 
     } catch (error) {
